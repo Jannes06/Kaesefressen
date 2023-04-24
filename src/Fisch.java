@@ -1,6 +1,6 @@
 import GLOOP.*;
-public class Kugel{
-    private GLKugel kugel;
+public class Fisch {
+    private GLKugel fisch;
     private Box dieBox;
     private Spielfeld feld;
     
@@ -8,7 +8,7 @@ public class Kugel{
     private boolean istAktiv;
     private double vX, vZ;
 
-    public Kugel(){
+    public Fisch(){
 
     }
 
