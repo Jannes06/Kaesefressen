@@ -9,4 +9,17 @@ public class Spielfeld{
         untergrund = new GLQuader(0,0,0, breite,20,tiefe);
         untergrund.setzeTextur("src/img/Marmor.jpg");
     }
+
+
+
+    public double gibX(){
+       return breite/2;
+
+
+    }
+    public double gibZ(){
+        return tiefe/2;
+
+
+    }
 }

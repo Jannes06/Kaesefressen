@@ -1,6 +1,6 @@
 import GLOOP.*;
 
-public class Kugelfang {
+public class Kugelszene {
     private GLKamera kamera;
     private GLLicht licht;
     private GLHimmel himmel;
@@ -8,25 +8,28 @@ public class Kugelfang {
     private Loch dasLoch;
     private Kugel kugel1, kugel2, kugel3;
 
-    public Kugelfang() {
+    public Kugelszene() {
         kamera = new GLKamera();
         kamera.setzePosition(0, 500, 800);
-        dasLoch = new Loch();
+
         licht = new GLLicht();
         himmel = new GLHimmel("src/img/Wolke.png");
         tastatur = new GLTastatur();
-        kugel1 = new Kugel();
+
         Spielfeld spielfeld = new Spielfeld(1000, 1000);
-       while (0==0) {
+        dasLoch = new Loch(spielfeld);
+        kugel1 = new Kugel(spielfeld);
+
            fuehreAus();
        }
-    }
+
 
 
     public void fuehreAus() {
-
+        while (0==0) {
             Steuerung();
-Sys.warte(5);
+            Sys.warte(5);
+        }
     }
 
     public void Steuerung() {
