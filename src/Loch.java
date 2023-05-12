@@ -6,8 +6,8 @@ public class Loch{
     private double breite, tiefe;
     double feldRandX,feldRandZ;
 
-    public Loch(Spielfeld pSpielfeld) {
-       loch = new GLZylinder(10,10,-10,50,1);
+    public Loch(Spielfeld pSpielfeld, double pRadius) {
+       loch = new GLZylinder(10,10,-10,pRadius,1);
        loch.setzeFarbe(0,0,1);
        loch.drehe(90,0,0);
        feld = pSpielfeld;
@@ -55,5 +55,8 @@ public class Loch{
 
 
     }
+          public void vergroessern(){
+         loch.skaliere(1.01,1,1.01);
 
+          }
 }
