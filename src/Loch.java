@@ -56,7 +56,7 @@ public class Loch{
 
     }
           public void vergroessern(){
-         loch.skaliere(1.01,1,1.01);
+         loch.skaliere(1.01,1.01,1);
 
           }
 }

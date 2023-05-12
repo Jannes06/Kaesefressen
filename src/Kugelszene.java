@@ -12,7 +12,7 @@ public class Kugelszene {
     int timer;
 
     int gesammelteKugeln =0;
-    int kugelanzahl = 100;
+    int kugelanzahl = 10000;
     double lochRadius  = 30;
 
     public Kugelszene() {
