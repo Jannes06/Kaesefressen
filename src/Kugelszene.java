@@ -12,15 +12,15 @@ public class Kugelszene {
     int timer;
 
     int gesammelteKugeln =0;
-    int kugelanzahl = 10000;
-    double lochRadius  = 30;
+    int kugelanzahl = 100;
+    int lochRadius  = 30;
 
     public Kugelszene() {
         kamera = new GLKamera();
         kamera.setzePosition(0, 500, 800);
 
         licht = new GLLicht();
-        himmel = new GLHimmel("src/img/Wolke.png");
+        himmel = new GLHimmel("src/img/Raum.png");
         tastatur = new GLTastatur();
 
         kugelAnzeige = new GLTafel(0,100,0,100,100);
@@ -76,8 +76,8 @@ public class Kugelszene {
         if (timer >500) {
             for (int e = 0; e < kugelanzahl; e++) {
                 gesammelteKugeln = gesammelteKugeln + kugeln[e].getroffenZahl();
-
-                kugeln[e].getroffen();
+                lochRadius = lochRadius+ kugeln[e].getroffenZahl();
+                kugeln[e].getroffen(lochRadius);
             }
             kugelAnzeige.setzeText(""+gesammelteKugeln,20);
 
