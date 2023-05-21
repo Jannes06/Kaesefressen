@@ -13,7 +13,7 @@ public class Kugelszene {
 
     int gesammelteKugeln =0;
     int kugelanzahl = 100;
-    int lochRadius  = 30;
+    double lochRadius  = 17;
 
     public Kugelszene() {
         kamera = new GLKamera();
@@ -31,11 +31,8 @@ public class Kugelszene {
         for (int i=0;i<kugelanzahl;i++) {
             kugeln[i]=new Kugel(spielfeld, dasLoch, lochRadius);
         }
-
            fuehreAus();
        }
-
-
 
     public void fuehreAus() {
         while (0==0) {
@@ -46,11 +43,8 @@ public class Kugelszene {
             kugelRollen();
             kugelFangen();
 
-
-
         }
     }
-
     public void Steuerung() {
 
         if (tastatur.oben()) {
@@ -63,7 +57,6 @@ public class Kugelszene {
             dasLoch.bewegeRechts();
         }
         if (tastatur.links()) {
-
             dasLoch.bewegeLinks();
         }
     }
@@ -76,11 +69,10 @@ public class Kugelszene {
         if (timer >500) {
             for (int e = 0; e < kugelanzahl; e++) {
                 gesammelteKugeln = gesammelteKugeln + kugeln[e].getroffenZahl();
-                lochRadius = lochRadius+ kugeln[e].getroffenZahl();
-                kugeln[e].getroffen(lochRadius);
+                    lochRadius = lochRadius + kugeln[e].getroffenZahl()-(gesammelteKugeln*0.1);
+                    kugeln[e].getroffen(lochRadius);
             }
-            kugelAnzeige.setzeText(""+gesammelteKugeln,20);
-
+            kugelAnzeige.setzeText("  "+gesammelteKugeln,20);
         }
     }
 }
