@@ -6,6 +6,7 @@ public class Kugel {
 
     double radius;
     private boolean istAktiv;
+    boolean kugelTot = false;
     private double vX, vZ;
     double richtungX = Math.random() * 4 - 2;
     double richtungZ = Math.random() * 4 - 2;
@@ -18,7 +19,7 @@ public class Kugel {
     double kugelRadius = Math.random()*30+10;
     double kugelhoehe = kugelRadius+10;
     public Kugel(Spielfeld pSpielfeld, Loch pLoch, double lochRadius) {
-        kugel = new GLKugel(Math.random()*30, kugelRadius, -Math.random()*30, kugelRadius);
+        kugel = new GLKugel(Math.random()*30, kugelhoehe, -Math.random()*30, kugelRadius);
 
 
         kugelTexturSetzung();
@@ -59,28 +60,38 @@ public class Kugel {
 
 
     public void bewege() {
-        kugel.verschiebe(richtungX, 0, richtungZ);
-        kugel.drehe(richtungX,1,richtungZ);
-        if (-feldRandZ > kugel.gibZ()) {
-            richtungZ = richtungZ * -1;
-        }
-        if (feldRandZ < kugel.gibZ()) {
-            richtungZ = richtungZ * -1;
-        }
-        if (-feldRandX > kugel.gibX()) {
-            richtungX = richtungX * -1;
-        }
-        if (feldRandX < kugel.gibX()) {
-            richtungX = richtungX * -1;
+        if (kugelTot == false) {
+            kugel.verschiebe(richtungX, 0, richtungZ);
+            kugel.drehe(richtungX, 1, richtungZ);
+            if (-feldRandZ > kugel.gibZ()) {
+                richtungZ = richtungZ * -1;
+            }
+            if (feldRandZ < kugel.gibZ()) {
+                richtungZ = richtungZ * -1;
+            }
+            if (-feldRandX > kugel.gibX()) {
+                richtungX = richtungX * -1;
+            }
+            if (feldRandX < kugel.gibX()) {
+                richtungX = richtungX * -1;
+            }
         }
     }
-
+      public void fallen(){
+        if (kugelTot == true) {
+            while (kugel.gibY() > 10 + kugelhoehe) {
+                kugel.verschiebe(0, -1, 0);
+                Sys.warte(50);
+            }
+        }
+    }
     public void getroffen(double radius) {
         gesammelteKugel = 0;
         if ((kugel.gibX() > dasLoch.gibX() - radius) && (kugel.gibX() < dasLoch.gibX() + radius) && (kugel.gibZ() > dasLoch.gibZ() - radius) && (kugel.gibZ() < dasLoch.gibZ() + radius) && (kugel.gibY() <5000) && (kugelRadius<radius)) {
             gesammelteKugel = 1;
             dasLoch.vergroessern();
-            kugel.verschiebe(-100000,5000,0);
+            kugel.verschiebe(0,5000,0);
+             kugelTot = true;
         }
     }
         public int getroffenZahl() {

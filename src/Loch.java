@@ -57,8 +57,8 @@ public class Loch{
 
     }
           public void vergroessern(){
-            double Y= vergroesserungY*0.987 ;
-            double X= vergroesserungX*0.987;
+            double Y= vergroesserungY*0.984 ;
+            double X= vergroesserungX*0.984 ;
 
               loch.skaliere(X,Y,1);
 
