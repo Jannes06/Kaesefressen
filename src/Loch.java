@@ -9,7 +9,7 @@ public class Loch{
 
     public Loch(Spielfeld pSpielfeld, double pRadius) {
        loch = new GLZylinder(10,10,-10,pRadius,1);
-       loch.setzeFarbe(0,0,1);
+       loch.setzeFarbe(1,100,1);
        loch.drehe(90,0,0);
        feld = pSpielfeld;
 

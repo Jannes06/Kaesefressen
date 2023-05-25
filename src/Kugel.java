@@ -1,6 +1,6 @@
 import GLOOP.*;
 public class Kugel {
-    private GLKugel kugel;
+    private GLKugel kugel, kugelTarnung;
     private Loch dasLoch;
     private Spielfeld feld;
 
@@ -16,11 +16,15 @@ public class Kugel {
     double kugelFarbe = Math.random()*10-4;
     int kugeFarbeneu = (int)kugelFarbe;
 
-    double kugelRadius = Math.random()*30+10;
+    double kugelRadius = Math.random()*30+11;
     double kugelhoehe = kugelRadius+10;
-    public Kugel(Spielfeld pSpielfeld, Loch pLoch, double lochRadius) {
-        kugel = new GLKugel(Math.random()*30, kugelhoehe, -Math.random()*30, kugelRadius);
 
+    boolean kugelaktiviert = false;
+    public Kugel(Spielfeld pSpielfeld, Loch pLoch, double lochRadius) {
+        double posX = Math.random()*30;
+        double posZ = -Math.random()*30;
+        kugel = new GLKugel(posX, kugelhoehe, posZ, kugelRadius-2);
+        kugelTarnung = new GLKugel(posX, kugelhoehe, posZ, kugelRadius-1);
 
         kugelTexturSetzung();
 
@@ -55,6 +59,7 @@ public class Kugel {
             if (kugeFarbeneu == 0) {
                 kugel.setzeTextur("src/img/KugelOrange13.png");
             }
+
         }
     }
 
@@ -62,7 +67,10 @@ public class Kugel {
     public void bewege() {
         if (kugelTot == false) {
             kugel.verschiebe(richtungX, 0, richtungZ);
+            kugelTarnung.verschiebe(richtungX, 0, richtungZ);
+
             kugel.drehe(richtungX, 1, richtungZ);
+            kugelTarnung.drehe(richtungX, 1, richtungZ);
             if (-feldRandZ > kugel.gibZ()) {
                 richtungZ = richtungZ * -1;
             }
@@ -75,17 +83,24 @@ public class Kugel {
             if (feldRandX < kugel.gibX()) {
                 richtungX = richtungX * -1;
             }
+            if ( kugelaktiviert == false ){
+              if (kugelRadius < radius){
+                  kugelTarnung.setzeSichtbarkeit(false);
+                  kugelaktiviert =true;
+              }
+            }
         }
     }
       public void fallen(){
         if (kugelTot == true) {
-            while (kugel.gibY() > 10 + kugelhoehe) {
+            while (kugel.gibY() >  kugelhoehe+10) {
                 kugel.verschiebe(0, -1, 0);
                 Sys.warte(50);
             }
         }
     }
-    public void getroffen(double radius) {
+    public void getroffen(double pradius) {
+        radius = pradius;
         gesammelteKugel = 0;
         if ((kugel.gibX() > dasLoch.gibX() - radius) && (kugel.gibX() < dasLoch.gibX() + radius) && (kugel.gibZ() > dasLoch.gibZ() - radius) && (kugel.gibZ() < dasLoch.gibZ() + radius) && (kugel.gibY() <5000) && (kugelRadius<radius)) {
             gesammelteKugel = 1;

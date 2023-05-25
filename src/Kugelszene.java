@@ -12,7 +12,7 @@ public class Kugelszene {
     int timer;
 
     int gesammelteKugeln =0;
-    int kugelanzahl = 100;
+    int kugelanzahl = 70;
     double lochRadius  = 17;
 
     double verkleinerungsFaktor = 1.05;
@@ -75,7 +75,7 @@ public class Kugelszene {
                 gesammelteKugeln = gesammelteKugeln + kugeln[e].getroffenZahl();
                 if (kugeln[e].getroffenZahl()>0){
                     lochRadius = lochRadius + kugeln[e].getroffenZahl()/ verkleinerungsFaktor ;
-                    verkleinerungsFaktor = verkleinerungsFaktor+0.1;
+                    verkleinerungsFaktor = verkleinerungsFaktor+0.08;
                 }
                 kugeln[e].getroffen(lochRadius);
             }
