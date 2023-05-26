@@ -93,19 +93,19 @@ public class Kugel {
     }
       public void fallen(){
         if (kugelTot == true) {
-            while (kugel.gibY() >  kugelhoehe+10) {
-                kugel.verschiebe(0, -1, 0);
-                Sys.warte(50);
+            if (kugel.gibY() >  kugelhoehe+10) {
+                kugel.verschiebe(0, -2, 0);
+                Sys.warte(1);
             }
         }
     }
     public void getroffen(double pradius) {
         radius = pradius;
         gesammelteKugel = 0;
-        if ((kugel.gibX() > dasLoch.gibX() - radius) && (kugel.gibX() < dasLoch.gibX() + radius) && (kugel.gibZ() > dasLoch.gibZ() - radius) && (kugel.gibZ() < dasLoch.gibZ() + radius) && (kugel.gibY() <5000) && (kugelRadius<radius)) {
+        if ((kugel.gibX() > dasLoch.gibX() - radius) && (kugel.gibX() < dasLoch.gibX() + radius) && (kugel.gibZ() > dasLoch.gibZ() - radius) && (kugel.gibZ() < dasLoch.gibZ() + radius) && (kugel.gibY() <1000) && (kugelRadius<radius)) {
             gesammelteKugel = 1;
             dasLoch.vergroessern();
-            kugel.verschiebe(0,5000,0);
+            kugel.verschiebe(0,2000,0);
              kugelTot = true;
         }
     }

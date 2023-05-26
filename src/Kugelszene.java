@@ -12,7 +12,7 @@ public class Kugelszene {
     int timer;
 
     int gesammelteKugeln =0;
-    int kugelanzahl = 70;
+    int kugelanzahl = 80;
     double lochRadius  = 17;
 
     double verkleinerungsFaktor = 1.05;
@@ -22,7 +22,7 @@ public class Kugelszene {
         kamera.setzePosition(0, 500, 800);
 
         licht = new GLLicht();
-        himmel = new GLHimmel("src/img/Raum.png");
+        himmel = new GLHimmel("src/img/Sterne.jpg");
         tastatur = new GLTastatur();
 
         kugelAnzeige = new GLTafel(0,100,0,100,100);
@@ -44,7 +44,7 @@ public class Kugelszene {
             Sys.warte(5);
             kugelRollen();
             kugelFangen();
-            if (gesammelteKugeln == kugelanzahl){
+            if (gesammelteKugeln == kugelanzahl || tastatur.enter()){
                 spielBeenden();
             }
         }
@@ -79,13 +79,19 @@ public class Kugelszene {
                 }
                 kugeln[e].getroffen(lochRadius);
             }
-            kugelAnzeige.setzeText("  "+lochRadius,20);
+            int kugelUebrig = kugelanzahl- gesammelteKugeln;
+            kugelAnzeige.setzeText("  "+kugelUebrig,20);
+            if (kugelUebrig == 0 ) {
+                kugelAnzeige.setzeText(" Gewonnen ;)  ",20);
+
+            }
         }
     }
     public void spielBeenden (){
+        while (0==0){
         for (int e = 0; e < kugelanzahl; e++) {
-        kugeln[e].fallen();
-
+            kugeln[e].fallen();
+        }
         }
         }
 }
