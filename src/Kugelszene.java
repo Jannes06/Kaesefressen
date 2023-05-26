@@ -12,7 +12,7 @@ public class Kugelszene {
     int timer;
 
     int gesammelteKugeln =0;
-    int kugelanzahl = 80;
+    int kugelanzahl = 20;
     double lochRadius  = 17;
 
     double verkleinerungsFaktor = 1.05;
@@ -25,7 +25,8 @@ public class Kugelszene {
         himmel = new GLHimmel("src/img/Sterne.jpg");
         tastatur = new GLTastatur();
 
-        kugelAnzeige = new GLTafel(0,100,0,100,100);
+        kugelAnzeige = new GLTafel(-300,400,0,100,100);
+        kugelAnzeige.setzeKamerafixierung(true);
 
         Spielfeld spielfeld = new Spielfeld(1000, 1000);
         dasLoch = new Loch(spielfeld, lochRadius);
@@ -80,7 +81,7 @@ public class Kugelszene {
                 kugeln[e].getroffen(lochRadius);
             }
             int kugelUebrig = kugelanzahl- gesammelteKugeln;
-            kugelAnzeige.setzeText("  "+kugelUebrig,20);
+            kugelAnzeige.setzeText(" Uebrige Kugeln:  "+kugelUebrig,20);
             if (kugelUebrig == 0 ) {
                 kugelAnzeige.setzeText(" Gewonnen ;)  ",20);
 
